@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <body>
+	 <form method="post" action="/api/blog">
+             <label for="name">Blog name:</label>
+                 <input type="text" name="name" /><br />
+             <label for="author">Your name:</label>
+                 <input type="text" name="author" /><br />
+	     Description:<br />
+	         <textarea rows="4" cols="50" name="desc"></textarea><br />
+	     <label for="url">Url:</label>
+	         <input type="text" name="url" /><br />
+	     <label for="url">Topics (comma seperated):</label>
+                 <input type="text" name="topics"/><br />
+	     <label for="url">Length (in minutes):</label>
+	         <input type="number" name="time"/><br />
+             <label for="url">How often do you post (in days)</label>
+	         <input type="number" name="regularity"/><br />
+             <input type="submit" />
+         </form>
+	 </body>
+    </head>
+</html>
