@@ -1,15 +1,27 @@
-<html>
-    <head>
-        <body>
-	 <form method="get" action="/api/read">
-	     <label for="url">Topics (comma seperated):</label>
-                 <input type="text" name="topics"/><br />
-	     <label for="url">Length (in minutes):</label>
-	         <input type="number" name="time"/><br />
-             <label for="url">How often do you post (in days)</label>
-	         <input type="number" name="regularity"/><br />
-             <input type="submit" />
+
+{% extends "base.html" %}
+{% block title %}Find a blog for me!{% endblock %}
+{% block content %}
+<div class="jumbotron">
+      <div class="container">
+		<form method="get" action="/api/read">
+	    <h1>Let's go find a blog!</h1>
+             <input type="text" class="form-control" name="topics" placeholder="What topics are you looking for? (comma seperated)"/>
+	         <input type="number" class="form-control" name="time" placeholder="How long a read do you want? (in minutes)"/>
+	         <input type="number" class="form-control" name="regularity" placeholder="How often will do you want new posts to come out? (in days)"/>
+             <button type="submit" class="btn btn-primary btn-block">Find a blog for me!</button>
          </form>
-	 </body>
-    </head>
-</html>
+          
+		</div></div>
+		<br>
+    <div class="container"><div class="row">
+		<h2>Some random blogs</h2>
+		<table class="table table-striped">
+			<tbody>
+                {% for i in blogs %}
+				<tr><td class="col-md-11"><b>{{i.name}}</b> &mdash; {{i.desc}}</td><td><a href="/blog/{{i._id}}"><button  type="submit" class="btn btn-info btn-xs">Read More</button></a></td></tr>
+                {% endfor %}
+			</tbody>
+  		</table>
+        </div></div>
+{% endblock %}

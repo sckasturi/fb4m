@@ -1,23 +1,24 @@
-<html>
-    <head>
-        <body>
-	 <form method="post" action="/api/blog">
-             <label for="name">Blog name:</label>
-                 <input type="text" name="name" /><br />
-             <label for="author">Your name:</label>
-                 <input type="text" name="author" /><br />
-	     Description:<br />
-	         <textarea rows="4" cols="50" name="desc"></textarea><br />
-	     <label for="url">Url:</label>
-	         <input type="text" name="url" /><br />
-	     <label for="url">Topics (comma seperated):</label>
-                 <input type="text" name="topics"/><br />
-	     <label for="url">Length (in minutes):</label>
-	         <input type="number" name="time"/><br />
-             <label for="url">How often do you post (in days)</label>
-	         <input type="number" name="regularity"/><br />
-             <input type="submit" />
-         </form>
-	 </body>
-    </head>
-</html>
+{% extends "base.html" %}
+{% block title %}{{blog.name}}{% endblock %}
+{% block content %}
+<div class="jumbotron">
+      <div class="container">
+	    <a href="{{blog.url}}"><h1>{{blog.name}}</h1></a>
+        <h2>{{blog.desc}}</h2>
+            <li><b>Author:</b> &mdash; {{blog.author}}</li>
+            <li><b>Post lenghts:</b> &mdash; {{blog.time}} minutes.</li>
+            <li><b>Time between posts:</b> &mdash; {{blog.regularity}} days.</li>
+            <li><b>Topics:</b> &mdash; {% for idx, i in enumerate(blog.topics) %} <span class="label label-{{ random_color(idx) }}">{{ i }}</span>{% endfor %}</li>
+		</div></div>
+		<br>
+    <div class="container"><div class="row">
+		<h2>Some random blogs</h2>
+		<table class="table table-striped">
+			<tbody>
+                {% for i in blogs %}
+				<tr><td class="col-md-11"><b>{{i.name}}</b> &mdash; {{i.desc}}</td><td><a href="/blog/{{i._id}}"><button  type="submit" class="btn btn-info btn-xs">Read More</button></a></td></tr>
+                {% endfor %}
+			</tbody>
+  		</table>
+        </div></div>
+{% endblock %}

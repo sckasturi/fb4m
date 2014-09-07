@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Submit a blog to me!{% endblock %}
+{% block content %}
+<div class="jumbotron">
+      <div class="container">
+		<form method="post" action="/api/blog">
+	    <h1>Let's add your blog!</h1>
+             <input type="text" class="form-control" name="name" placeholder="Name of your blog"/>
+             <input type="text" class="form-control" name="author" placeholder="Your name!"/>
+             <input type="text" class="form-control" name="desc" placeholder="Description of your blog goes here :)">
+             <input type="text" class="form-control" name="url" placeholder="Url to your blog."/>                                      
+             <input type="text" class="form-control" name="topics" placeholder="What topics is your blog about? (comma seperated)"/>
+	         <input type="number" class="form-control" name="time" placeholder="How long a read is your blog? (in minutes)"/>
+	         <input type="number" class="form-control" name="regularity" placeholder="How often do you post (in days)"/>
+             <button type="submit" class="btn btn-primary btn-block">Find a blog for me!</button>
+         </form>
+          
+		</div></div>
+		<br>
+    <div class="container"><div class="row">
+		<h2>Some random blogs</h2>
+		<table class="table table-striped">
+			<tbody>
+                {% for i in blogs %}
+				<tr><td class="col-md-11"><b>{{i.name}}</b> &mdash; {{i.desc}}</td><td><a href="/blog/{{i._id}}"><button  type="submit" class="btn btn-info btn-xs">Read More</button></a></td></tr>
+                {% endfor %}
+			</tbody>
+  		</table>
+        </div></div>
+{% endblock %}

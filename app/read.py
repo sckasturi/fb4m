@@ -1,8 +1,10 @@
 from app import app
-from flask import jsonify, request, render_template
+from flask import jsonify, request, render_template, redirect
 from pymongo import MongoClient
 from random import choice
 from json import loads as json
+from app.blog import get_blogs
+
 client = MongoClient()
 
 @app.route('/api/read', methods = ['GET'])
@@ -20,12 +22,17 @@ def reader():
     for i in empty_keys:
         del query[i]
     for blog in db.blogs.find(query):
-        del blog["_id"]
         blogs.append(blog)
     if len(blogs) == 0:
-        return jsonify([])
-    return jsonify(choice(blogs))
+        return redirect('/blog/none')
+    return redirect('/blog/' + str(choice(blogs)["_id"]))
 
 @app.route('/')
 def find_blogs():
-   return render_template("index.html") 
+   db = client.findablogforme
+   blogs = db.blogs.find()[:10]
+   #for i in db.blogs.find():
+   #    if len(blogs) == 10:
+   #        break
+   #    blogs.append(i)
+   return render_template("index.html", blogs = get_blogs()) 
